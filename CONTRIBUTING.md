@@ -14,6 +14,11 @@ Additional notes regarding formatting:
 * [Code formatting](#code-formatting)
 * [File Naming](#standard-library-file-naming)
 
+## Feature request
+For any feature requests or enhancements to the Pony distribution, it is quite likely that you have to go through our [RFC process](https://github.com/ponylang/rfcs). Before opening or submitting any feature requests, please make sure you are familiar with the RFC process and follow the process as required.
+
+If you submit a pull request to implement a new feature without going through the RFC process, it may be closed with a polite request to submit an RFC first.
+
 ## Bug report
 
 First of all please [search existing issues](https://github.com/ponylang/regex/issues) to make sure your issue hasn't already been reported. If you cannot find a suitable issue — [create a new one](https://github.com/ponylang/regex/issues/new).
