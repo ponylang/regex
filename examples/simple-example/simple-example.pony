@@ -1,6 +1,6 @@
 // in your code this `use` statement would be:
 // use "regex"
-use "../regex"
+use "../../regex"
 
 actor Main
   new create(env: Env) =>
