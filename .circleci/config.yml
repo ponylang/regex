@@ -4,7 +4,7 @@ jobs:
     docker:
       - image: ponylang/ponyc:release
     steps:
-      - run: sudo apt-get install -y libpcre2-dev
+      - run: apt-get install -y libpcre2-dev
       - checkout
       - run: make test config=release
 
@@ -12,7 +12,7 @@ jobs:
     docker:
       - image: ponylang/ponyc:release
     steps:
-      - run: sudo apt-get install -y libpcre2-dev
+      - run: apt-get install -y libpcre2-dev
       - checkout
       - run: make test config=debug
 
@@ -20,7 +20,7 @@ jobs:
     docker:
       - image: ponylang/ponyc:latest
     steps:
-      - run: sudo apt-get install -y libpcre2-dev
+      - run: apt-get install -y libpcre2-dev
       - checkout
       - run: make test config=release
 
@@ -28,7 +28,7 @@ jobs:
     docker:
       - image: ponylang/ponyc:latest
     steps:
-      - srun: udo apt-get install -y libpcre2-dev
+      - srun: apt-get install -y libpcre2-dev
       - checkout
       - run: make test config=debug
 
