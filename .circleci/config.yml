@@ -28,7 +28,7 @@ jobs:
     docker:
       - image: ponylang/ponyc:latest
     steps:
-      - srun: apt-get install -y libpcre2-dev
+      - run: apt-get install -y libpcre2-dev
       - checkout
       - run: make test config=debug
 
