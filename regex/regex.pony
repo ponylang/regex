@@ -46,6 +46,7 @@ primitive _PCRE2
   fun utf(): U32 => 0x00080000                // PCRE2_UTF
   fun substitute_global(): U32 => 0x00000100  // PCRE2_SUBSTITUTE_GLOBAL
   fun not_empty(): U32 => 0x00000004          // PCRE2_NOTEMPTY
+  fun err_no_memory(): I32 => -48             // PCRE2_ERROR_NOMEMORY
 
 class Regex
   """
@@ -74,7 +75,7 @@ class Regex
     _jit = jit and (@pcre2_jit_compile_8[I32](_pattern, U32(1)) == 0)
 
   fun matches(subject: String): MatchIterator =>
-    """ 
+    """
     Creates a match iterator from the regular expression that will iterate
     over the supplied subject returning matches.
     """
@@ -141,12 +142,12 @@ class Regex
           Pointer[U8], value.cpointer(), value.size(), out.cpointer(),
           addressof len)
 
-      if rc == -48 then
+      if rc == _PCRE2.err_no_memory() then
         len = out.space() * 2
         out.reserve(len)
         len = out.space()
       end
-    until rc != -48 end
+    until rc != _PCRE2.err_no_memory() end
 
     if rc <= 0 then
       error
