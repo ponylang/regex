@@ -9,7 +9,7 @@ jobs:
       - image: ponylang/ponyc:release
     steps:
       - run: apt-get update
-      - run: apt-get install -y libpcre2-dev curl
+      - run: apt-get install -y libpcre2-dev
       - checkout
       - run: make test config=release
       - zulip/status:
@@ -20,7 +20,7 @@ jobs:
       - image: ponylang/ponyc:release
     steps:
       - run: apt-get update
-      - run: apt-get install -y libpcre2-dev curl
+      - run: apt-get install -y libpcre2-dev 
       - checkout
       - run: make test config=debug
       - zulip/status: 
