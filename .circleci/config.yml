@@ -63,6 +63,8 @@ jobs:
     steps:
       - checkout
       - run: bash .ci-scripts/release.bash "$CIRCLE_TAG" "$GITHUB_TOKEN" "$ZULIP_RELEASE_ANNOUNCEMENT_TOKEN"
+      - zulip/status:
+          fail_only: true
 
   generate-documentation-pr-for-main-dot-actor:
     docker:
@@ -70,6 +72,8 @@ jobs:
     steps:
       - checkout
       - run: bash .ci-scripts/documentation.bash "$CIRCLE_TAG" "$GITHUB_TOKEN"
+      - zulip/status:
+          fail_only: true
 
 workflows:
   version: 2.1
