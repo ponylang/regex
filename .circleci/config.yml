@@ -10,15 +10,11 @@ jobs:
     steps:
       - checkout
       - run: changelog-tool verify
-      - zulip/status:
-          fail_only: true
 
   release-vs-ponyc-release:
     docker:
-      - image: ponylang/ponyc:release
+      - image: ponylang/shared-docker-ci-x86-64-unknown-linux-builder-with-pcre:release
     steps:
-      - run: apt-get update
-      - run: apt-get install -y libpcre2-dev
       - checkout
       - run: make test config=release
       - zulip/status:
@@ -26,10 +22,8 @@ jobs:
 
   release-vs-ponyc-master:
     docker:
-      - image: ponylang/ponyc:latest
+      - image: ponylang/shared-docker-ci-x86-64-unknown-linux-builder-with-pcre:latest
     steps:
-      - run: apt-get update
-      - run: apt-get install -y libpcre2-dev
       - checkout
       - run: make test config=release
       - zulip/status:
@@ -37,10 +31,8 @@ jobs:
 
   debug-vs-ponyc-release:
     docker:
-      - image: ponylang/ponyc:release
+      - image: ponylang/shared-docker-ci-x86-64-unknown-linux-builder-with-pcre:release
     steps:
-      - run: apt-get update
-      - run: apt-get install -y libpcre2-dev
       - checkout
       - run: make test config=debug
       - zulip/status:
@@ -48,10 +40,8 @@ jobs:
 
   debug-vs-ponyc-master:
     docker:
-      - image: ponylang/ponyc:latest
+      - image: ponylang/shared-docker-ci-x86-64-unknown-linux-builder-with-pcre:latest
     steps:
-      - run: apt-get update
-      - run: apt-get install -y libpcre2-dev
       - checkout
       - run: make test config=debug
       - zulip/status:
