@@ -4,7 +4,7 @@ Pony library that brings Perl compatible regular expressions to Pony. Requires l
 
 ## Status
 
-[![CircleCI](https://circleci.com/gh/ponylang/regex.svg?style=svg)](https://circleci.com/gh/ponylang/regex)
+[![Actions Status](https://github.com/ponylang/regex/workflows/vs-ponyc-latest/badge.svg)](https://github.com/ponylang/regex/actions)
 
 Production ready.
 
