@@ -1,6 +1,6 @@
 # regex
 
-Pony library that brings Perl compatible regular expressions to Pony. Requires libpcre2. See installation for more details. 
+Pony library that brings Perl compatible regular expressions to Pony. Requires libpcre2. See installation for more details.
 
 ## Status
 
@@ -14,9 +14,13 @@ Production ready.
 * Update your `bundle.json`
 
 ```json
-{ 
-  "type": "github",
-  "repo": "ponylang/regex"
+{
+  "deps": [
+    { "type": "github",
+      "repo": "ponylang/regex",
+      "tag": "1.0.0"
+    }
+  ]
 }
 ```
 
