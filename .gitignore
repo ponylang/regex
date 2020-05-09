@@ -1,4 +1,5 @@
-build/*
+/build/*
 TAGS
 tags
-
+/_repos/*
+/_corral/*
