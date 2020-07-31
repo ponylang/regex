@@ -89,7 +89,7 @@ sudo zypper install pcre2-devel
 ```
 ### Installing on Windows
 
-Download a prebuilt binary from [http://www.pcre.org/](http://www.pcre.org/).
+Before using this package, run `.\make.ps1 libs` to download and build PCRE2. You will need Visual C++ 2019, CMake, and 7-zip installed.
 
 ### Building PCRE2 from source
 
