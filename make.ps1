@@ -231,7 +231,11 @@ switch ($Command.ToLower())
   "distclean"
   {
     $distDir = Join-Path -Path $rootDir -ChildPath "build"
-    Remove-Item -Path $distDir -Recurse -Force
+    if (Test-Path $distDir)
+    {
+      Remove-Item -Path $distDir -Recurse -Force
+    }
+    Remove-Item -Path "*.lib" -Force
   }
 
   "install"
