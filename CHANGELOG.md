@@ -9,6 +9,7 @@ All notable changes to this library will be documented in this file. This projec
 
 ### Added
 
+- Make installation easier on Windows ([PR #22](https://github.com/ponylang/regex/pull/22))
 
 ### Changed
 
