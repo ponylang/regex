@@ -9,6 +9,7 @@ All notable changes to this library will be documented in this file. This projec
 
 ### Added
 
+- Build Windows libs upon fetch. ([PR #24](https://github.com/ponylang/regex/pull/24))
 
 ### Changed
 
