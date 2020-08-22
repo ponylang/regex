@@ -89,7 +89,7 @@ sudo zypper install pcre2-devel
 ```
 ### Installing on Windows
 
-Before using this package, run `.\make.ps1 libs` to download and build PCRE2. You will need Visual C++ 2019, CMake, and 7-zip installed.
+If you use [Corral](https://github.com/ponylang/corral) to include this package as dependency of a project, Corral will download and build PCRE2 for you the first time you run `corral fetch`.  Otherwise, before using this package, you must run `.\make.ps1 libs` in its base directory to download and build PCRE2 for Windows. In both cases, you will need CMake (3.15 or higher) and 7Zip (`7z.exe`) in your `PATH`; and Visual Studio 2019 (or the Visual C++ Build Tools 2019) installed in your system.
 
 ### Building PCRE2 from source
 
