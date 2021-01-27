@@ -100,3 +100,7 @@ cd pcre2-10.21
 make
 sudo make install
 ```
+
+## API Documentation
+
+[https://ponylang.github.io/regex](https://ponylang.github.io/regex)
