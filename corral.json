@@ -1,6 +1,13 @@
 {
   "deps": [],
-  "info": {},
+  "info": {
+    "description": "Perl compatible regular expression support",
+    "homepage": "https://github.com/ponylang/regex",
+    "license": "BSD-2-Clause",
+    "documentation_url": "https://ponylang.github.io/regex",
+    "version": "1.1.0",
+    "name": "regex"
+  },
   "scripts": {
     "windows": {
       "post_fetch_or_update": "PowerShell.exe -File make.ps1 -Config release -Command libs"
