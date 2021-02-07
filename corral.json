@@ -1,5 +1,6 @@
 {
   "deps": [],
+  "packages": ["regex"],
   "info": {
     "description": "Perl compatible regular expression support",
     "homepage": "https://github.com/ponylang/regex",
