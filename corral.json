@@ -1,12 +1,14 @@
 {
   "deps": [],
-  "packages": ["regex"],
+  "packages": [
+    "regex"
+  ],
   "info": {
     "description": "Perl compatible regular expression support",
     "homepage": "https://github.com/ponylang/regex",
     "license": "BSD-2-Clause",
     "documentation_url": "https://ponylang.github.io/regex",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "name": "regex"
   },
   "scripts": {
