@@ -1,3 +1,14 @@
+use @pcre2_get_ovector_count_8[U32](match_data: Pointer[_Match] tag)
+use @pcre2_get_startchar_8[USize](match_data: Pointer[_Match] tag)
+use @pcre2_substring_length_bynumber_8[I32](match_data: Pointer[_Match] tag,
+  number: U32, length: Pointer[USize])
+use @pcre2_substring_copy_bynumber_8[I32](match_data: Pointer[_Match] tag,
+  number: U32, buffer: Pointer[U8] tag, buf_len: Pointer[USize])
+use @pcre2_substring_length_byname_8[I32](match_data: Pointer[_Match] tag,
+  name: Pointer[U8] tag, length: Pointer[USize])
+use @pcre2_substring_copy_byname_8[I32](match_data: Pointer[_Match] tag,
+  name: Pointer[U8] tag, buffer: Pointer[U8] tag, buf_len: Pointer[USize])
+
 primitive _Match
 
 class Match
@@ -14,7 +25,7 @@ class Match
     """
     _match = m
     _subject = subject
-    _size = @pcre2_get_ovector_count_8[U32](m)
+    _size = @pcre2_get_ovector_count_8(m)
 
   fun size(): U32 =>
     """
@@ -26,14 +37,14 @@ class Match
     """
     Returns the character position of the first character in the match.
     """
-    @pcre2_get_startchar_8[USize](_match)
+    @pcre2_get_startchar_8(_match)
 
   fun end_pos(): USize =>
     """
     Returns the character position of the last character in the match.
     """
     var len = USize(0)
-    @pcre2_substring_length_bynumber_8[I32](_match, U32(0), addressof len)
+    @pcre2_substring_length_bynumber_8(_match, U32(0), addressof len)
     start_pos() + (len - 1)
 
   fun apply[A: (ByteSeq iso & Seq[U8] iso) = String iso](i: U32): A^ ? =>
@@ -45,13 +56,13 @@ class Match
     end
 
     var len = USize(0)
-    var rc = @pcre2_substring_length_bynumber_8[I32](_match, i, addressof len)
+    var rc = @pcre2_substring_length_bynumber_8(_match, i, addressof len)
     if rc != 0 then error end
     len = len + 1
 
     let out = recover A(len) end
     len = out.space()
-    rc = @pcre2_substring_copy_bynumber_8[I32](_match, i, out.cpointer(),
+    rc = @pcre2_substring_copy_bynumber_8(_match, i, out.cpointer(),
       addressof len)
     if rc != 0 then error end
     out.truncate(len)
@@ -66,7 +77,7 @@ class Match
     """
     var len = USize(0)
     let rc =
-      @pcre2_substring_length_byname_8[I32](_match, name.cstring(),
+      @pcre2_substring_length_byname_8(_match, name.cstring(),
         addressof len)
 
     if rc != 0 then
@@ -77,7 +88,7 @@ class Match
     let out = recover A(len) end
     len = out.space()
 
-    @pcre2_substring_copy_byname_8[I32](_match, name.cstring(), out.cpointer(),
+    @pcre2_substring_copy_byname_8(_match, name.cstring(), out.cpointer(),
       addressof len)
     out.truncate(len)
     out
@@ -105,7 +116,7 @@ class Match
     Free the underlying PCRE2 data.
     """
     if not _match.is_null() then
-      @pcre2_match_data_free_8[None](_match)
+      @pcre2_match_data_free_8(_match)
       _match = Pointer[_Match]
     end
 
@@ -114,5 +125,5 @@ class Match
     Free the underlying PCRE2 data.
     """
     if not _match.is_null() then
-      @pcre2_match_data_free_8[None](_match)
+      @pcre2_match_data_free_8(_match)
     end
