@@ -40,6 +40,23 @@ actor Main
 
 use "lib:pcre2-8"
 
+use @pcre2_compile_8[Pointer[_Pattern]](pattern: Pointer[U8] tag, size: USize,
+  options: U32, errcode: Pointer[I32] tag, offset: Pointer[USize], ccontext: Pointer[U8])
+use @pcre2_jit_compile_8[I32](code: Pointer[_Pattern] tag, options: U32)
+use @pcre2_code_free_8[None](code: Pointer[_Pattern] tag)
+use @pcre2_match_data_create_from_pattern_8[Pointer[_Match]](code: Pointer[_Pattern] tag,
+  gcontext: Pointer[U8])
+use @pcre2_match_8[I32](code: Pointer[_Pattern] tag, subject: Pointer[U8] tag, s_length: USize,
+  offset: USize, options: U32, match_data: Pointer[_Match], mcontext: Pointer[U8])
+use @pcre2_jit_match_8[I32]( code: Pointer[_Pattern] tag, subject: Pointer[U8] tag, s_length: USize,
+  offset: USize, options: U32, match_data: Pointer[_Match], mcontext: Pointer[U8])
+use @pcre2_match_data_free_8[None](data: Pointer[_Match] tag)
+use @pcre2_substitute_8[I32](code: Pointer[_Pattern] tag, subject: Pointer[U8] tag, length: USize,
+  offset: USize, options: U32, match_data: Pointer[U8], mcontext: Pointer[U8],
+  replacement: Pointer[U8] tag, rlength: USize,
+  out_buffer: Pointer[U8] tag, out_length_size: Pointer[USize])
+use @pcre2_substring_number_from_name[I32](code: Pointer[_Pattern] tag, name: Pointer[U8] tag)
+
 primitive _Pattern
 
 primitive _PCRE2
@@ -65,14 +82,14 @@ class Regex
     var erroffset: USize = 0
 
     _pattern =
-      @pcre2_compile_8[Pointer[_Pattern]](from.cpointer(), from.size(),
+      @pcre2_compile_8(from.cpointer(), from.size(),
         _PCRE2.utf(), addressof err, addressof erroffset, Pointer[U8])
 
     if _pattern.is_null() then
       error
     end
 
-    _jit = jit and (@pcre2_jit_compile_8[I32](_pattern, U32(1)) == 0)
+    _jit = jit and (@pcre2_jit_compile_8(_pattern, 1) == 0)
 
   fun matches(subject: String): MatchIterator =>
     """
@@ -87,7 +104,7 @@ class Regex
     """
     try
       let m = _match(subject, 0, 0)?
-      @pcre2_match_data_free_8[None](m)
+      @pcre2_match_data_free_8(m)
       true
     else
       false
@@ -137,10 +154,10 @@ class Regex
 
     repeat
       rc =
-        @pcre2_substitute_8[I32](_pattern,
-          subject.cpointer(), subject.size(), offset, opt, Pointer[U8],
-          Pointer[U8], value.cpointer(), value.size(), out.cpointer(),
-          addressof len)
+        @pcre2_substitute_8(_pattern, subject.cpointer(), subject.size(),
+          offset, opt, Pointer[U8], Pointer[U8],
+          value.cpointer(), value.size(),
+          out.cpointer(), addressof len)
 
       if rc == _PCRE2.err_no_memory() then
         len = out.space() * 2
@@ -188,7 +205,7 @@ class Regex
     does not exist.
     """
     let rc =
-      @pcre2_substring_number_from_name[I32](_pattern, name.cstring())
+      @pcre2_substring_number_from_name(_pattern, name.cstring())
 
     if rc < 0 then
       error
@@ -201,7 +218,7 @@ class Regex
     Free the underlying PCRE2 data.
     """
     if not _pattern.is_null() then
-      @pcre2_code_free_8[None](_pattern)
+      @pcre2_code_free_8(_pattern)
       _pattern = Pointer[_Pattern]
     end
 
@@ -217,19 +234,18 @@ class Regex
     end
 
     let m =
-      @pcre2_match_data_create_from_pattern_8[Pointer[_Match]](_pattern,
-        Pointer[U8])
+      @pcre2_match_data_create_from_pattern_8(_pattern, Pointer[U8])
 
     let rc = if _jit then
-      @pcre2_jit_match_8[I32](_pattern, subject.cpointer(), subject.size(),
+      @pcre2_jit_match_8(_pattern, subject.cpointer(), subject.size(),
         offset, options, m, Pointer[U8])
     else
-      @pcre2_match_8[I32](_pattern, subject.cpointer(), subject.size(), offset,
+      @pcre2_match_8(_pattern, subject.cpointer(), subject.size(), offset,
         options, m, Pointer[U8])
     end
 
     if rc <= 0 then
-      @pcre2_match_data_free_8[None](m)
+      @pcre2_match_data_free_8(m)
       error
     end
     m
@@ -239,5 +255,5 @@ class Regex
     Free the underlying PCRE2 data.
     """
     if not _pattern.is_null() then
-      @pcre2_code_free_8[None](_pattern)
+      @pcre2_code_free_8(_pattern)
     end
