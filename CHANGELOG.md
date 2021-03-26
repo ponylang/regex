@@ -12,6 +12,7 @@ All notable changes to this library will be documented in this file. This projec
 
 ### Changed
 
+- Declare all FFI functions ([PR #29](https://github.com/ponylang/regex/pull/29))
 
 ## [1.1.1] - 2021-02-08
 
