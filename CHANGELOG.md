@@ -2,13 +2,7 @@
 
 All notable changes to this library will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a CHANGELOG](http://keepachangelog.com/).
 
-## [unreleased] - unreleased
-
-### Fixed
-
-
-### Added
-
+## [1.1.2] - 2021-03-26
 
 ### Changed
 
