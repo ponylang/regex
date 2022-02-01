@@ -1,6 +1,6 @@
 use "ponytest"
 
-actor Main is TestList
+actor \nodoc\ Main is TestList
   new create(env: Env) => PonyTest(env, this)
   new make() => None
 
@@ -13,7 +13,7 @@ actor Main is TestList
     test(_TestSplit)
     test(_TestError)
 
-class iso _TestApply is UnitTest
+class \nodoc\ iso _TestApply is UnitTest
   """
   Tests basic compilation and matching.
   """
@@ -26,7 +26,7 @@ class iso _TestApply is UnitTest
     h.assert_eq[USize](USize(2), m.start_pos())
     h.assert_eq[USize](USize(5), m.end_pos())
 
-class iso _TestGroups is UnitTest
+class \nodoc\ iso _TestGroups is UnitTest
   """
   Tests basic compilation and matching.
   """
@@ -52,7 +52,7 @@ class iso _TestGroups is UnitTest
     h.assert_eq[String](m3(2)?, "456")
     h.assert_array_eq[String](m3.groups(), [""; "456"])
 
-class iso _TestEq is UnitTest
+class \nodoc\ iso _TestEq is UnitTest
   """
   Tests eq operator.
   """
@@ -63,7 +63,7 @@ class iso _TestEq is UnitTest
     h.assert_true(r == "1234", """ \d+ =~ "1234" """)
     h.assert_true(r != "asdf", """ \d+ !~ "asdf" """)
 
-class iso _TestMatchIterator is UnitTest
+class \nodoc\ iso _TestMatchIterator is UnitTest
   """
   Tests the match iterator
   """
@@ -87,7 +87,7 @@ class iso _TestMatchIterator is UnitTest
     h.assert_eq[String](m6(0)?, "-60")
     h.assert_false(matches.has_next())
 
-class iso _TestMatchIteratorEmpty is UnitTest
+class \nodoc\ iso _TestMatchIteratorEmpty is UnitTest
   """
   Tests the match iterator when the subject doesn't contain any matches
   for the regular expression
@@ -100,7 +100,7 @@ class iso _TestMatchIteratorEmpty is UnitTest
 
     h.assert_false(matches.has_next())
 
-class iso _TestSplit is UnitTest
+class \nodoc\ iso _TestSplit is UnitTest
   """
   Tests split.
   """
@@ -112,7 +112,7 @@ class iso _TestSplit is UnitTest
     h.assert_array_eq[String](["abcdef"], Regex("\\d*")?.split("abcdef")?)
     h.assert_array_eq[String](["abc"; "def"], Regex("\\d*")?.split("abc1def")?)
 
-class iso _TestError is UnitTest
+class \nodoc\ iso _TestError is UnitTest
   """
   Tests basic compilation failure.
   """
