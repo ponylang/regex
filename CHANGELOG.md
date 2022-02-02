@@ -2,17 +2,11 @@
 
 All notable changes to this library will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a CHANGELOG](http://keepachangelog.com/).
 
-## [unreleased] - unreleased
+## [1.1.3] - 2022-02-02
 
 ### Fixed
 
 - Update prce2 download location ([PR #37](https://github.com/ponylang/regex/pull/37))
-
-### Added
-
-
-### Changed
-
 
 ## [1.1.2] - 2021-03-26
 
