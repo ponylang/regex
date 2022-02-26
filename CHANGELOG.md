@@ -7,6 +7,7 @@ All notable changes to this library will be documented in this file. This projec
 ### Fixed
 
 - Update to address PonyTest package being renamed ([PR #40](https://github.com/ponylang/regex/pull/40))
+- Remove hardcoded Visual Studio version ([PR #41](https://github.com/ponylang/regex/pull/41))
 
 ### Added
 
