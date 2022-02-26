@@ -9,7 +9,7 @@ Production ready.
 ## Installation
 
 * Install [corral](https://github.com/ponylang/corral)
-* `corral add github.com/ponylang/regex.git --version 1.1.4`
+* `corral add github.com/ponylang/regex.git --version 1.1.5`
 * `corral fetch` to fetch your dependencies
 * `use "regex"` to include this package
 * `corral run -- ponyc` to compile your application
