@@ -2,18 +2,12 @@
 
 All notable changes to this library will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a CHANGELOG](http://keepachangelog.com/).
 
-## [unreleased] - unreleased
+## [1.1.5] - 2022-02-26
 
 ### Fixed
 
 - Update to address PonyTest package being renamed ([PR #40](https://github.com/ponylang/regex/pull/40))
 - Remove hardcoded Visual Studio version ([PR #41](https://github.com/ponylang/regex/pull/41))
-
-### Added
-
-
-### Changed
-
 
 ## [1.1.4] - 2022-02-10
 
