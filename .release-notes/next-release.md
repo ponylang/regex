@@ -2,3 +2,7 @@
 
 The Pony unit testing framework PonyTest had [its package name renamed](https://github.com/ponylang/ponyc/pull/4032) from `ponytest` to `pony_test` to match standard library naming conventions. We've updated to account for the new name.
 
+## Remove hardcoding of Visual Studio version
+
+We don't need a specific hardcoded version to build scripts.
+
