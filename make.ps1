@@ -167,7 +167,7 @@ function BuildLibs
     if (-not (Test-Path $pcre2Lib))
     {
       Push-Location $pcre2Src
-      cmake.exe $pcre2Src -G "Visual Studio 16 2019" -Thost=x64 -A x64 -DCMAKE_INSTALL_PREFIX="$libsDir" -DCMAKE_BUILD_TYPE="Release"
+      cmake.exe $pcre2Src -Thost=x64 -A x64 -DCMAKE_INSTALL_PREFIX="$libsDir" -DCMAKE_BUILD_TYPE="Release"
       if ($LastExitCode -ne 0) { Pop-Location; throw "Error configuring $pcre2" }
       cmake.exe --build . --target install --config Release
       if ($LastExitCode -ne 0) { Pop-Location; throw "Error building $pcre2" }
