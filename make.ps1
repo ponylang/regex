@@ -158,9 +158,7 @@ function BuildLibs
       $pcre2ZipTgt = Join-Path -Path $libsDir -ChildPath $pcre2Zip
       if (-not (Test-Path $pcre2ZipTgt)) { Invoke-WebRequest -TimeoutSec 300 -Uri "https://github.com/PhilipHazel/pcre2/releases/download/$pcre2/$pcre2Zip" -OutFile $pcre2ZipTgt }
       Write-Output "Expand-Archive -Force -LiteralPath `"$pcre2ZipTgt`" -DestinationPath `"$libsDir`""
-      $output = Expand-Archive -Force -LiteralPath "$pcre2ZipTgt" -DestinationPath "$libsDir"
-      Write-Output $output
-      if ($LastExitCode -ne 0) { throw "Error downloading and unzipping $pcre2Zip" }
+      Expand-Archive -Force -LiteralPath "$pcre2ZipTgt" -DestinationPath "$libsDir"
     }
 
     # Write-Output "Building $pcre2"
