@@ -12,6 +12,7 @@ All notable changes to this library will be documented in this file. This projec
 
 ### Changed
 
+- Use the native `Expand-Archive` command on Windows instead of 7-Zip ([PR #60](https://github.com/ponylang/regex/pull/60))
 
 ## [1.1.5] - 2022-02-26
 
