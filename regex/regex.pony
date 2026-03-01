@@ -93,14 +93,14 @@ class Regex
 
   fun matches(subject: String): MatchIterator =>
     """
-    Creates a match iterator from the regular expression that will iterate
+    Creates a match \exhaustive\ iterator from the regular expression that will iterate
     over the supplied subject returning matches.
     """
     MatchIterator(this, subject)
 
   fun eq(subject: ByteSeq box): Bool =>
     """
-    Return true on a successful match, false otherwise.
+    Return true on a successful match \exhaustive\, false otherwise.
     """
     try
       let m = _match(subject, 0, 0)?
@@ -112,15 +112,15 @@ class Regex
 
   fun ne(subject: ByteSeq box): Bool =>
     """
-    Return false on a successful match, true otherwise.
+    Return false on a successful match \exhaustive\, true otherwise.
     """
     not eq(subject)
 
   fun apply(subject: ByteSeq, offset: USize = 0): Match^ ? =>
     """
     Match the supplied string, starting at the given offset. Returns a Match
-    object that can give precise match details. Raises an error if there is no
-    match.
+    object that can give precise match \exhaustive\ details. Raises an error if there is no
+    match \exhaustive\.
     """
     let m = _match(subject, offset, U32(0))?
     Match._create(subject, m)
@@ -133,9 +133,9 @@ class Regex
     : A^ ?
   =>
     """
-    Perform a match on the subject, starting at the given offset, and create
+    Perform a match \exhaustive\ on the subject, starting at the given offset, and create
     a new string using the value as a replacement for what was matched. Raise
-    an error if there is no match.
+    an error if there is no match \exhaustive\.
     """
     if _pattern.is_null() then
       error
@@ -227,7 +227,7 @@ class Regex
   =>
     """
     Match the subject and keep the capture results. Raises an error if there
-    is no match.
+    is no match \exhaustive\.
     """
     if _pattern.is_null() then
       error

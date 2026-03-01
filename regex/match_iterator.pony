@@ -1,7 +1,7 @@
 class MatchIterator is Iterator[Match]
   """
-  MatchIterator allows for calling code to repeatedly perform the same match
-  against a subject string as an iterator. This lets callers repeat the match 
+  MatchIterator allows for calling code to repeatedly perform the same match \exhaustive\
+  against a subject string as an iterator. This lets callers repeat the match \exhaustive\ 
   until no more matches exist.
   """
   let _regex: Regex box
@@ -19,7 +19,7 @@ class MatchIterator is Iterator[Match]
 
   fun has_next() : Bool =>
     """
-    Indicates whether there is another match available.
+    Indicates whether there is another match \exhaustive\ available.
     """
     try
       let m = _regex(_subject, _offset)?
@@ -30,8 +30,8 @@ class MatchIterator is Iterator[Match]
 
   fun ref next(): Match ? =>
     """
-    Yields the next match to the regular expression or produces
-    an error if there is no match.
+    Yields the next match \exhaustive\ to the regular expression or produces
+    an error if there is no match \exhaustive\.
     """
     let m = _regex(_subject, _offset)?
     _offset = m.end_pos() + 1 
