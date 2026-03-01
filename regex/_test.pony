@@ -65,7 +65,7 @@ class \nodoc\ iso _TestEq is UnitTest
 
 class \nodoc\ iso _TestMatchIterator is UnitTest
   """
-  Tests the match \exhaustive\ iterator
+  Tests the match iterator
   """
   fun name(): String => "regex/Regex.matches"
 
@@ -89,7 +89,7 @@ class \nodoc\ iso _TestMatchIterator is UnitTest
 
 class \nodoc\ iso _TestMatchIteratorEmpty is UnitTest
   """
-  Tests the match \exhaustive\ iterator when the subject doesn't contain any matches
+  Tests the match iterator when the subject doesn't contain any matches
   for the regular expression
   """
   fun name(): String => "regex/Regex.matches/nomatch"

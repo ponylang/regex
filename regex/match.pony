@@ -13,7 +13,7 @@ primitive _Match
 
 class Match
   """
-  Contains match \exhaustive\ data for a combination of a regex and a subject.
+  Contains match data for a combination of a regex and a subject.
   """
   var _match: Pointer[_Match]
   let _subject: ByteSeq
@@ -21,7 +21,7 @@ class Match
 
   new _create(subject: ByteSeq, m: Pointer[_Match]) =>
     """
-    Store a match \exhaustive\, a subject, and a size.
+    Store a match, a subject, and a size.
     """
     _match = m
     _subject = subject
@@ -29,19 +29,19 @@ class Match
 
   fun size(): U32 =>
     """
-    Returns the capture size of the match \exhaustive\.
+    Returns the capture size of the match.
     """
     _size
 
   fun start_pos(): USize =>
     """
-    Returns the character position of the first character in the match \exhaustive\.
+    Returns the character position of the first character in the match.
     """
     @pcre2_get_startchar_8(_match)
 
   fun end_pos(): USize =>
     """
-    Returns the character position of the last character in the match \exhaustive\.
+    Returns the character position of the last character in the match.
     """
     var len = USize(0)
     @pcre2_substring_length_bynumber_8(_match, U32(0), addressof len)
