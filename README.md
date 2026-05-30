@@ -93,9 +93,9 @@ If you use [Corral](https://github.com/ponylang/corral) to include this package 
 ### Building PCRE2 from source
 
 ```bash
-wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre2-10.21.tar.bz2
-tar xvf pcre2-10.21.tar.bz2
-cd pcre2-10.21
+wget https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.47/pcre2-10.47.tar.bz2
+tar xvf pcre2-10.47.tar.bz2
+cd pcre2-10.47
 ./configure --prefix=/usr
 make
 sudo make install
