@@ -145,7 +145,7 @@ function BuildTest
 
 function BuildLibs
 {
-  $pcre2 = "pcre2-10.35"
+  $pcre2 = "pcre2-10.47"
   $pcre2LibTgt = Join-Path -Path $rootDir -ChildPath "pcre2-8.lib"
 
   if (-not (Test-Path $pcre2LibTgt))
@@ -156,13 +156,15 @@ function BuildLibs
     {
       $pcre2Zip = "$pcre2.zip"
       $pcre2ZipTgt = Join-Path -Path $libsDir -ChildPath $pcre2Zip
-      if (-not (Test-Path $pcre2ZipTgt)) { Invoke-WebRequest -TimeoutSec 300 -Uri "https://github.com/PhilipHazel/pcre2/releases/download/$pcre2/$pcre2Zip" -OutFile $pcre2ZipTgt }
+      if (-not (Test-Path $pcre2ZipTgt)) { Invoke-WebRequest -TimeoutSec 300 -Uri "https://github.com/PCRE2Project/pcre2/releases/download/$pcre2/$pcre2Zip" -OutFile $pcre2ZipTgt }
       Write-Output "Expand-Archive -Force -LiteralPath `"$pcre2ZipTgt`" -DestinationPath `"$libsDir`""
       Expand-Archive -Force -LiteralPath "$pcre2ZipTgt" -DestinationPath "$libsDir"
     }
 
     # Write-Output "Building $pcre2"
-    $pcre2Lib = Join-Path -Path $libsDir -ChildPath "lib/pcre2-8.lib"
+    # PCRE2's CMake build names the static library `pcre2-8-static.lib`; we
+    # copy it to `pcre2-8.lib` below so Pony's `use "lib:pcre2-8"` finds it.
+    $pcre2Lib = Join-Path -Path $libsDir -ChildPath "lib/pcre2-8-static.lib"
 
     if (-not (Test-Path $pcre2Lib))
     {
