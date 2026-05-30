@@ -12,6 +12,7 @@ All notable changes to this library will be documented in this file. This projec
 
 ### Changed
 
+- Update PCRE2 to 10.47 on Windows ([PR #83](https://github.com/ponylang/regex/pull/83))
 
 ## [1.1.6] - 2024-12-05
 
