@@ -40,22 +40,35 @@ actor Main
 
 use "lib:pcre2-8"
 
-use @pcre2_compile_8[Pointer[_Pattern]](pattern: Pointer[U8] tag, size: USize,
-  options: U32, errcode: Pointer[I32] tag, offset: Pointer[USize], ccontext: Pointer[U8])
-use @pcre2_jit_compile_8[I32](code: Pointer[_Pattern] tag, options: U32)
-use @pcre2_code_free_8[None](code: Pointer[_Pattern] tag)
-use @pcre2_match_data_create_from_pattern_8[Pointer[_Match]](code: Pointer[_Pattern] tag,
-  gcontext: Pointer[U8])
-use @pcre2_match_8[I32](code: Pointer[_Pattern] tag, subject: Pointer[U8] tag, s_length: USize,
-  offset: USize, options: U32, match_data: Pointer[_Match], mcontext: Pointer[U8])
-use @pcre2_jit_match_8[I32]( code: Pointer[_Pattern] tag, subject: Pointer[U8] tag, s_length: USize,
-  offset: USize, options: U32, match_data: Pointer[_Match], mcontext: Pointer[U8])
-use @pcre2_match_data_free_8[None](data: Pointer[_Match] tag)
-use @pcre2_substitute_8[I32](code: Pointer[_Pattern] tag, subject: Pointer[U8] tag, length: USize,
-  offset: USize, options: U32, match_data: Pointer[U8], mcontext: Pointer[U8],
+use @pcre2_compile_8[Pointer[_Pattern]](
+  pattern: Pointer[U8] tag, size: USize, options: U32,
+  errcode: Pointer[I32] tag, offset: Pointer[USize],
+  ccontext: Pointer[U8])
+use @pcre2_jit_compile_8[I32](
+  code: Pointer[_Pattern] tag, options: U32)
+use @pcre2_code_free_8[None](
+  code: Pointer[_Pattern] tag)
+use @pcre2_match_data_create_from_pattern_8[Pointer[_Match]](
+  code: Pointer[_Pattern] tag, gcontext: Pointer[U8])
+use @pcre2_match_8[I32](
+  code: Pointer[_Pattern] tag, subject: Pointer[U8] tag,
+  s_length: USize, offset: USize, options: U32,
+  match_data: Pointer[_Match], mcontext: Pointer[U8])
+use @pcre2_jit_match_8[I32](
+  code: Pointer[_Pattern] tag, subject: Pointer[U8] tag,
+  s_length: USize, offset: USize, options: U32,
+  match_data: Pointer[_Match], mcontext: Pointer[U8])
+use @pcre2_match_data_free_8[None](
+  data: Pointer[_Match] tag)
+use @pcre2_substitute_8[I32](
+  code: Pointer[_Pattern] tag, subject: Pointer[U8] tag,
+  length: USize, offset: USize, options: U32,
+  match_data: Pointer[U8], mcontext: Pointer[U8],
   replacement: Pointer[U8] tag, rlength: USize,
-  out_buffer: Pointer[U8] tag, out_length_size: Pointer[USize])
-use @pcre2_substring_number_from_name[I32](code: Pointer[_Pattern] tag, name: Pointer[U8] tag)
+  out_buffer: Pointer[U8] tag,
+  out_length_size: Pointer[USize])
+use @pcre2_substring_number_from_name[I32](
+  code: Pointer[_Pattern] tag, name: Pointer[U8] tag)
 
 primitive _Pattern
 
@@ -82,8 +95,13 @@ class Regex
     var erroffset: USize = 0
 
     _pattern =
-      @pcre2_compile_8(from.cpointer(), from.size(),
-        _PCRE2.utf(), addressof err, addressof erroffset, Pointer[U8])
+      @pcre2_compile_8(
+        from.cpointer(),
+        from.size(),
+        _PCRE2.utf(),
+        addressof err,
+        addressof erroffset,
+        Pointer[U8])
 
     if _pattern.is_null() then
       error
@@ -141,11 +159,12 @@ class Regex
       error
     end
 
-    var opt = if global then
-      _PCRE2.substitute_global()
-    else
-      U32(0)
-    end
+    var opt =
+      if global then
+        _PCRE2.substitute_global()
+      else
+        U32(0)
+      end
 
     var len = subject.size().max(64)
     let out = recover A(len) end
@@ -154,10 +173,18 @@ class Regex
 
     repeat
       rc =
-        @pcre2_substitute_8(_pattern, subject.cpointer(), subject.size(),
-          offset, opt, Pointer[U8], Pointer[U8],
-          value.cpointer(), value.size(),
-          out.cpointer(), addressof len)
+        @pcre2_substitute_8(
+          _pattern,
+          subject.cpointer(),
+          subject.size(),
+          offset,
+          opt,
+          Pointer[U8],
+          Pointer[U8],
+          value.cpointer(),
+          value.size(),
+          out.cpointer(),
+          addressof len)
 
       if rc == _PCRE2.err_no_memory() then
         len = out.space() * 2
@@ -223,7 +250,7 @@ class Regex
     end
 
   fun _match(subject: ByteSeq box, offset: USize, options: U32)
-    : Pointer[_Match]?
+    : Pointer[_Match] ?
   =>
     """
     Match the subject and keep the capture results. Raises an error if there
@@ -236,13 +263,26 @@ class Regex
     let m =
       @pcre2_match_data_create_from_pattern_8(_pattern, Pointer[U8])
 
-    let rc = if _jit then
-      @pcre2_jit_match_8(_pattern, subject.cpointer(), subject.size(),
-        offset, options, m, Pointer[U8])
-    else
-      @pcre2_match_8(_pattern, subject.cpointer(), subject.size(), offset,
-        options, m, Pointer[U8])
-    end
+    let rc =
+      if _jit then
+        @pcre2_jit_match_8(
+          _pattern,
+          subject.cpointer(),
+          subject.size(),
+          offset,
+          options,
+          m,
+          Pointer[U8])
+      else
+        @pcre2_match_8(
+          _pattern,
+          subject.cpointer(),
+          subject.size(),
+          offset,
+          options,
+          m,
+          Pointer[U8])
+      end
 
     if rc <= 0 then
       @pcre2_match_data_free_8(m)

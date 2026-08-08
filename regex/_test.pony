@@ -107,7 +107,8 @@ class \nodoc\ iso _TestSplit is UnitTest
   fun name(): String => "regex/Regex.split"
 
   fun apply(h: TestHelper) ? =>
-    h.assert_array_eq[String](["ab"; "cd"; "ef"],
+    h.assert_array_eq[String](
+      ["ab"; "cd"; "ef"],
       Regex("\\d+")?.split("ab12cd34ef")?)
     h.assert_array_eq[String](["abcdef"], Regex("\\d*")?.split("abcdef")?)
     h.assert_array_eq[String](["abc"; "def"], Regex("\\d*")?.split("abc1def")?)
