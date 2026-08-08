@@ -62,8 +62,9 @@ class Match
 
     let out = recover A(len) end
     len = out.space()
-    rc = @pcre2_substring_copy_bynumber_8(_match, i, out.cpointer(),
-      addressof len)
+    rc =
+      @pcre2_substring_copy_bynumber_8(
+        _match, i, out.cpointer(), addressof len)
     if rc != 0 then error end
     out.truncate(len)
     out
@@ -77,8 +78,8 @@ class Match
     """
     var len = USize(0)
     let rc =
-      @pcre2_substring_length_byname_8(_match, name.cstring(),
-        addressof len)
+      @pcre2_substring_length_byname_8(
+        _match, name.cstring(), addressof len)
 
     if rc != 0 then
       error
@@ -88,8 +89,8 @@ class Match
     let out = recover A(len) end
     len = out.space()
 
-    @pcre2_substring_copy_byname_8(_match, name.cstring(), out.cpointer(),
-      addressof len)
+    @pcre2_substring_copy_byname_8(
+      _match, name.cstring(), out.cpointer(), addressof len)
     out.truncate(len)
     out
 
