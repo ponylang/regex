@@ -47,7 +47,9 @@ class Match
     @pcre2_substring_length_bynumber_8(_match, U32(0), addressof len)
     start_pos() + (len - 1)
 
-  fun apply[A: (ByteSeq iso & Seq[U8] iso) = String iso](i: U32): A^ ? =>
+  fun apply[A: (ByteSeq iso & ResizableSeq[U8] iso) = String iso](
+    i: U32): A^ ?
+  =>
     """
     Returns a capture by number. Raises an error if the index is out of bounds.
     """
@@ -69,7 +71,7 @@ class Match
     out.truncate(len)
     out
 
-  fun find[A: (ByteSeq iso & Seq[U8] iso) = String iso]
+  fun find[A: (ByteSeq iso & ResizableSeq[U8] iso) = String iso]
     (name: String box): A^ ?
   =>
     """

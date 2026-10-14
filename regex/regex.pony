@@ -143,7 +143,7 @@ class Regex
     let m = _match(subject, offset, U32(0))?
     Match._create(subject, m)
 
-  fun replace[A: (Seq[U8] iso & ByteSeq iso) = String iso](
+  fun replace[A: (ResizableSeq[U8] iso & ByteSeq iso) = String iso](
     subject: ByteSeq,
     value: ByteSeq box,
     offset: USize = 0,

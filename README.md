@@ -8,6 +8,7 @@ Production ready.
 
 ## Installation
 
+* Requires ponyc 0.76.0 or later.
 * Install [corral](https://github.com/ponylang/corral)
 * `corral add github.com/ponylang/regex.git --version 1.1.7`
 * `corral fetch` to fetch your dependencies
