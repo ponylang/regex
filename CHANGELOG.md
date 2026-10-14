@@ -12,6 +12,7 @@ All notable changes to this library will be documented in this file. This projec
 
 ### Changed
 
+- Update for ponyc 0.76.0 ([PR #97](https://github.com/ponylang/regex/pull/97))
 
 ## [1.1.7] - 2026-05-30
 
